@@ -1,3 +1,11 @@
-body{
-    background-color: rebeccapurple;
-}
+#home-container {
+  display: flex;
+  background-color: red; }
+  #home-container #feed-posts {
+    width: 70%;
+    height: 10px; }
+  #home-container #user-friends {
+    width: 30%;
+    padding: 10px;
+    border-left: 1px solid lightgrey;
+    height: 100%; }

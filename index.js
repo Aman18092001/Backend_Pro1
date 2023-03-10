@@ -1,6 +1,6 @@
 const express=require('express');
 const app=express();
-const port=4000;
+const port=4500;
 const cookieParser=require('cookie-parser');
 const expressLayout=require('express-ejs-layouts');
 const db=require('./config/mongoose');
@@ -9,6 +9,9 @@ const passport=require('passport');
 const passportLocal=require('./config/passport-local-strategy');
 const MongoStore=require('connect-mongo');
 const sassMIddleware=require('node-sass-middleware');
+const flash=require('connect-flash');
+const customMware=require('./config/middleware');
+
 app.use(sassMIddleware({
     src:'./assets/scss',
     dest:'./assets/css',
@@ -29,7 +32,7 @@ app.set('layout extractScripts',true);
 // set up view engine
 app.set('view engine','ejs');
 app.set('views','./views');
-
+console.log('hello world');
 //mongo store is used to store the session cookie in the db 
 app.use(session({
     name:'codeial',
@@ -55,6 +58,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
+app.use(flash());
+app.use(customMware.setFlash);
 
 // use express router
 app.use('/',require('./routes'));
